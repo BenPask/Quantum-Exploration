@@ -30,14 +30,19 @@ class QuantumCircuit:
         return self
 
     def px(self, target_idx):
+
+        mask = 1 << target_idx
+
         sv = self.state_vector
 
-        idx1 = np.array(range(self.size//2))
-        idx1 = (idx1 * 2) - (idx1 % 2)
-        idx2 = idx1 + 2**target_idx
+        total_indices = np.arange(len(sv))
 
-        sv[idx1], sv[idx2] = sv[idx2], sv[idx1]
+        idx1 = total_indices[(total_indices & mask) == 0]
+
+        idx2 = idx1 ^ mask
+
+        sv[idx1], sv[idx2] = sv[idx2].copy(), sv[idx1].copy()
 
 
-        get_bin_string = np.vectorize(np.binary_repr)
+
         return self
