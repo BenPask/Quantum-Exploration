@@ -1,1 +1,1 @@
-# QML
+# Numpy-Only N-Qubit Statevector Simulator

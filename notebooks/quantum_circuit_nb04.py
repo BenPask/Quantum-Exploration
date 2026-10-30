@@ -30,19 +30,30 @@ class QuantumCircuit:
         return self
 
     def px(self, target_idx):
-
         mask = 1 << target_idx
-
         sv = self.state_vector
 
         total_indices = np.arange(len(sv))
 
         idx1 = total_indices[(total_indices & mask) == 0]
-
         idx2 = idx1 ^ mask
 
         sv[idx1], sv[idx2] = sv[idx2].copy(), sv[idx1].copy()
 
+        return self
 
+    def cnot(self, control_idx, target_idx):
+        control_mask = 1 << control_idx
+        target_mask = 1 << target_idx
+        sv = self.state_vector
+
+        total_indices = np.arange(len(sv))
+
+        idxs_when_c1 = total_indices[(total_indices & control_mask) != 0]
+
+        idxs_when_t0 = idxs_when_c1[(idxs_when_c1 & target_mask) == 0]
+        idxs_when_t1 = idxs_when_t0 ^ target_mask
+
+        sv[idxs_when_t0], sv[idxs_when_t1] = sv[idxs_when_t1].copy(), sv[idxs_when_t0].copy()
 
         return self
