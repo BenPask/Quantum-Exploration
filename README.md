@@ -40,7 +40,8 @@ circuit.h(0).cnot(0, 1)
 #Print probability amplitudes alongside ##binary representation of possibilities
 circuit.show_amp_bin()
 
-'''Save a copy of the 1D state array with the values now corresponding to the number of times that possible state was measured'''
+'''Save a copy of the 1D state array with the values now corresponding to the number of
+times that possible state was measured'''
 
 measurements = circuit.measure(1000)
 ```
