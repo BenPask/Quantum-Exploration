@@ -6,21 +6,27 @@ let pyodide;
 
 async function start() {
     pyodide = await loadPyodide();
-    await pyodide.loadPackage("numpy")
+    await pyodide.loadPackage("numpy");
+    await pyodide.loadPackage("matplotlib");
 
     const response = await fetch('quantum_circuit.py');
     const code = await response.text();
     pyodide.runPython(code);
-    
 
+    const visResponse = await fetch('visualizer_graphing.py');
+    const visCode = await visResponse.text();
+    pyodide.runPython(visCode);
+    
     initializeApp();
+    
 }
 
 start();
 
+let numOfQubits = 3;
 
-
-const numOfQubits = 3;
+//ADD THIS TO DYNAMIC RESET SCRIPT WHEN ADDING ADD QUBIT FEATURES
+let currentCounts = Array(2**numOfQubits).fill(0);
 
 const measureButtons = {
     x1:document.querySelector(".measure-1x-button"),
@@ -41,7 +47,15 @@ measureButtons.x1.addEventListener("click", async function(){
 })
 
 measureButtons.x10.addEventListener("click", async function(){
-    const pyProxy = pyodide.runPython(`circuit.measure(10)`);
+    pyodide.runPython(`circuit.h(0)`);
+    pyodide.runPython(`temp_measurements = circuit.measure(10)`);
+    const pyProxy = pyodide.runPython(`temp_measurements`);
+
+
+    const measurementsToAdd = pyodide.runPython(`temp_measurements.tolist()`).toJs();
+    console.log(measurementsToAdd)
+    currentCounts = currentCounts.map((num, index) => num + measurementsToAdd[index]);
+
     const result = pyProxy.toJs();
 
     for(let i = 0; i < 10; i++){
@@ -52,9 +66,16 @@ measureButtons.x10.addEventListener("click", async function(){
         displayOutput("...");
         await delay(200); 
     }
+    displayHistogram(currentCounts)
 
     pyProxy.destroy();
 })
+
+function displayHistogram(counts){
+    console.log(counts)
+    const imgUri = pyodide.runPython(`getHistogram(${counts}, 4, 4)`);
+    document.querySelector(".histogram-container").innerHTML = `<img src="${imgUri}" style="width:100%; height:100%; object-fit:contain;">`;
+}
 
 measureButtons.x1000.addEventListener("click", async function(){
     const pyProxy = pyodide.runPython(`circuit.measure(1000)`);
