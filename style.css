@@ -32,7 +32,6 @@
 }
 
 .qubit {
-    
     cy: 10%; 
     r: 4%; 
     fill: rgb(255, 0, 0);
@@ -41,6 +40,12 @@
 .output-menu {
     flex: 1;
     background-color: lightgray;
+    
+}
+
+.output-text-container {
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .bottom-panel {
