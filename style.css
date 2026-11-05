@@ -1,0 +1,59 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+    
+}
+
+.menu {
+    box-shadow: inset 0 0 0 1px black;
+}
+
+.top-panel{
+    flex: 2;
+    display: flex;
+}
+
+.dragables-menu {
+    flex: 1;
+    background-color: gray;
+}
+
+.qubit-view-menu {
+    flex: 3;
+    background-color: lightblue;
+}
+
+.qubit-container {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.qubit {
+    
+    cy: 10%; 
+    r: 4%; 
+    fill: rgb(255, 0, 0);
+}
+
+.output-menu {
+    flex: 1;
+    background-color: lightgray;
+}
+
+.bottom-panel {
+    flex: 1;
+    display: flex;
+}
+
+.timeline-menu {
+    flex: 4;
+    background-color: rgb(218, 132, 203);
+}
+
+.actions-menu {
+    flex: 1;
+    background-color: rgb(150, 34, 78);
+}
