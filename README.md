@@ -4,8 +4,8 @@
 
 This project serves as a log of my mathematical exploration and hands-on implementations of fundamental quantum computing concepts. It progresses from complex amplitudes and basic notation to implementing gate operations, entanglement, and measurement statistics.
 
-[**INTERACTIVE CIRCUIT SIMULATOR WEB APP**](https://gramsofprotean.github.io/home/statevector-sim/index.html)
-
+[**UPDATE: INTERACTIVE CIRCUIT SIMULATOR WEB APP NOW LIVE**](https://gramsofprotean.github.io/home/statevector-sim/index.html)
+<img width="1918" height="907" alt="image" src="https://github.com/user-attachments/assets/6ccee305-986c-4b07-940d-6d8abe71a199" />
 
 ## Features
 
