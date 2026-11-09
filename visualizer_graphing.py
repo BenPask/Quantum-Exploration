@@ -33,3 +33,13 @@ def getHistogram(counts, width, height):
     plt.close()
     
     return "data:image/png;base64," + base64.b64encode(buf.getvalue()).decode() 
+
+def getPresentOrder(measurements):
+    measurements_int = np.array(measurements).astype(np.int32)
+
+    all_indices = np.arange(len(measurements_int))
+
+    presented_idx_order = np.repeat(all_indices, measurements_int)
+    np.random.shuffle(presented_idx_order)
+
+    return presented_idx_order
